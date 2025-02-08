@@ -14,7 +14,6 @@ export type MaterialTopTabsCollapsibleTabViewProps = Parameters<typeof MaterialT
 };
 
 export default function MaterialTopTabsCollapsibleTabView({
-  pager,
   lazyPlaceholder,
   tabBar = (props: MaterialTopTabBarProps) => <MaterialTopTabBar {...props} />,
   tabBarOptions,
