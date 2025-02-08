@@ -1,11 +1,5 @@
-import React from 'react';
-import {
-  StyleSheet,
-  Animated,
-  ViewStyle,
-  LayoutChangeEvent,
-  View,
-} from 'react-native';
+import React from "react";
+import { StyleSheet, Animated, ViewStyle, LayoutChangeEvent, View } from "react-native";
 import {
   TabView,
   TabBar,
@@ -14,11 +8,11 @@ import {
   TabBarProps,
   NavigationState,
   SceneRendererProps,
-} from 'react-native-tab-view';
-import { useDebouncedCallback } from 'use-debounce';
-import { CollapsibleContextProvider } from './CollapsibleTabViewContext';
-import scrollScene from './scrollScene';
-import type { ScrollRef, GetRef } from './types';
+} from "react-native-tab-view";
+import { useDebouncedCallback } from "use-debounce";
+import { CollapsibleContextProvider } from "./CollapsibleTabViewContext";
+import scrollScene from "./scrollScene";
+import type { ScrollRef, GetRef } from "./types";
 
 type PTabBarProps<T extends Route> = Partial<TabBarProps<T>>;
 
@@ -29,11 +23,10 @@ export type RenderTabBarProps<T extends Route, P extends object = {}> = {
 } & SceneRendererProps &
   P;
 
-export type Props<
-  T extends Route,
-  P extends object = PTabBarProps<T>
-> = Partial<Omit<TabViewProps<T>, 'renderTabBar'>> &
-  Pick<TabViewProps<T>, 'onIndexChange' | 'navigationState' | 'renderScene'> & {
+export type Props<T extends Route, P extends object = PTabBarProps<T>> = Partial<
+  Omit<TabViewProps<T>, "renderTabBar">
+> &
+  Pick<TabViewProps<T>, "onIndexChange" | "navigationState" | "renderScene"> & {
     /**
      * Optionally controlled animated value.
      * Default is `new Animated.Value(0)`.
@@ -106,10 +99,7 @@ export type Props<
  * `CollapsibleTabView` wraps the `TabView` and take care of animations /
  * scroll value computations. It should be used with `useCollapsibleScene`.
  */
-const CollapsibleTabView = <
-  T extends Route,
-  P extends object = PTabBarProps<T>
->({
+const CollapsibleTabView = <T extends Route, P extends object = PTabBarProps<T>>({
   animatedValue = new Animated.Value(0),
   navigationState: { index, routes },
   renderHeader = () => null,
@@ -123,14 +113,12 @@ const CollapsibleTabView = <
   onHeaderHeightChange,
   snapThreshold = 0.5,
   snapTimeout = 250,
-  routeKeyProp = 'key',
+  routeKeyProp = "key",
   ...tabViewProps
 }: React.PropsWithoutRef<Props<T, P>>): React.ReactElement => {
-  const [headerHeight, setHeaderHeight] = React.useState(
-    Math.max(initialHeaderHeight, 0)
-  );
+  const [headerHeight, setHeaderHeight] = React.useState(Math.max(initialHeaderHeight, 0));
   const scrollY = React.useRef(animatedValue);
-  const listRefArr = React.useRef<{ key: T['key']; value?: ScrollRef }[]>([]);
+  const listRefArr = React.useRef<{ key: T["key"]; value?: ScrollRef }[]>([]);
   const listOffset = React.useRef<{ [key: string]: number }>({});
   const isGliding = React.useRef(false);
   /** Used to keep track if the user is actively scrolling */
@@ -151,15 +139,15 @@ const CollapsibleTabView = <
       }
     },
     16, // check about once per frame
-    { trailing: true, leading: false }
+    { trailing: true, leading: false },
   );
 
   const [translateY, setTranslateY] = React.useState(
     scrollY.current.interpolate({
       inputRange: [0, Math.max(headerHeight, 0)],
       outputRange: [0, -headerHeight],
-      extrapolateRight: 'clamp',
-    })
+      extrapolateRight: "clamp",
+    }),
   );
 
   React.useLayoutEffect(() => {
@@ -181,12 +169,7 @@ const CollapsibleTabView = <
     const curRouteKey = routes[index][routeKeyProp as keyof Route] as string;
     const offset = listOffset.current[curRouteKey];
 
-    const newOffset = calculateNewOffset(
-      offset,
-      headerHeight,
-      disableSnap,
-      snapThreshold
-    );
+    const newOffset = calculateNewOffset(offset, headerHeight, disableSnap, snapThreshold);
 
     listRefArr.current.forEach((item) => {
       const isCurrentRoute = item.key === curRouteKey;
@@ -221,12 +204,7 @@ const CollapsibleTabView = <
 
     setCanSnap(false);
 
-    const newOffset = calculateNewOffset(
-      offset,
-      headerHeight,
-      disableSnap,
-      snapThreshold
-    );
+    const newOffset = calculateNewOffset(offset, headerHeight, disableSnap, snapThreshold);
 
     if (newOffset !== null && newOffset !== offset) {
       listRefArr.current.forEach((item) => {
@@ -238,27 +216,14 @@ const CollapsibleTabView = <
         });
       });
     }
-  }, [
-    canSnap,
-    disableSnap,
-    headerHeight,
-    index,
-    routeKeyProp,
-    routes,
-    snapThreshold,
-  ]);
+  }, [canSnap, disableSnap, headerHeight, index, routeKeyProp, routes, snapThreshold]);
 
   const maybeSnap = React.useCallback(() => {
     const curRouteKey = routes[index][routeKeyProp as keyof Route] as string;
 
     const offset = listOffset.current[curRouteKey];
 
-    const newOffset = calculateNewOffset(
-      offset,
-      headerHeight,
-      disableSnap,
-      snapThreshold
-    );
+    const newOffset = calculateNewOffset(offset, headerHeight, disableSnap, snapThreshold);
 
     // only snap if the current offset is different
     if (newOffset !== null && offset !== newOffset) {
@@ -307,18 +272,19 @@ const CollapsibleTabView = <
    * It is exposed in the context.
    */
   const buildGetRef = React.useCallback(
-    (routeKey: string): GetRef => (ref) => {
-      if (ref) {
-        const found = listRefArr.current.find((e) => e.key === routeKey);
-        if (!found) {
-          listRefArr.current.push({
-            key: routeKey,
-            value: ref,
-          });
+    (routeKey: string): GetRef =>
+      (ref) => {
+        if (ref) {
+          const found = listRefArr.current.find((e) => e.key === routeKey);
+          if (!found) {
+            listRefArr.current.push({
+              key: routeKey,
+              value: ref,
+            });
+          }
         }
-      }
-    },
-    []
+      },
+    [],
   );
 
   /**
@@ -336,11 +302,11 @@ const CollapsibleTabView = <
         scrollY.current.interpolate({
           inputRange: [0, Math.max(value, tabBarHeight)], // Always allow for a minimum of `tabBarHeight`
           outputRange: [0, -value],
-          extrapolateRight: 'clamp',
-        })
+          extrapolateRight: "clamp",
+        }),
       );
     },
-    [onHeaderHeightChange, scrollY, tabBarHeight]
+    [onHeaderHeightChange, scrollY, tabBarHeight],
   );
 
   /**
@@ -357,18 +323,13 @@ const CollapsibleTabView = <
   const renderTabBar = (
     props: SceneRendererProps & {
       navigationState: NavigationState<T>;
-    }
+    },
   ): React.ReactNode => {
     return (
       <Animated.View
         pointerEvents="box-none"
-        style={[
-          styles.headerContainer,
-          { transform: [{ translateY }] },
-          headerContainerStyle,
-        ]}
-        onLayout={getHeaderHeight}
-      >
+        style={[styles.headerContainer, { transform: [{ translateY }] }, headerContainerStyle]}
+        onLayout={getHeaderHeight}>
         {renderHeader()}
         {customRenderTabBar ? (
           // @ts-ignore
@@ -395,9 +356,7 @@ const CollapsibleTabView = <
     );
   };
 
-  const [containerHeight, setContainerHeight] = React.useState<
-    number | undefined
-  >(undefined);
+  const [containerHeight, setContainerHeight] = React.useState<number | undefined>(undefined);
 
   const onLayout = React.useCallback((e: LayoutChangeEvent) => {
     setContainerHeight(e.nativeEvent.layout.height);
@@ -419,8 +378,7 @@ const CollapsibleTabView = <
       onLayout={onLayout}
       onTouchStart={onTouchStart}
       onTouchCancel={onTouchEnd}
-      onTouchEnd={onTouchEnd}
-    >
+      onTouchEnd={onTouchEnd}>
       <CollapsibleContextProvider
         value={{
           activeRouteKey: routes[index][routeKeyProp as keyof Route] as string,
@@ -433,8 +391,7 @@ const CollapsibleTabView = <
           onScrollEndDrag,
           onMomentumScrollEnd,
           containerHeight: containerHeight || 0,
-        }}
-      >
+        }}>
         <TabView
           {...tabViewProps}
           navigationState={{ index, routes }}
@@ -449,12 +406,12 @@ const styles = StyleSheet.create({
   headerContainer: {
     top: 0,
     zIndex: 1,
-    position: 'absolute',
-    width: '100%',
+    position: "absolute",
+    width: "100%",
   },
   container: {
     flex: 1,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
 });
 
@@ -464,15 +421,15 @@ function calculateNewOffset(
   offset: number,
   headerHeight: number,
   disableSnap: boolean,
-  snapThreshold: number
+  snapThreshold: number,
 ) {
   return offset >= 0 && offset <= headerHeight
     ? disableSnap
       ? offset
       : offset <= headerHeight * snapThreshold
-      ? 0
-      : offset > headerHeight * snapThreshold
-      ? headerHeight
-      : null
+        ? 0
+        : offset > headerHeight * snapThreshold
+          ? headerHeight
+          : null
     : null;
 }

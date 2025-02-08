@@ -1,8 +1,4 @@
-import {
-  Animated,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
-} from 'react-native';
+import { Animated, NativeSyntheticEvent, NativeScrollEvent } from "react-native";
 
 export type ScrollableView = {
   scrollTo: (params: { x?: number; y?: number; animated?: boolean }) => void;
@@ -49,9 +45,7 @@ export type CollapsibleContext = {
   headerHeight: number;
   tabBarHeight: number;
   containerHeight: number;
-  onMomentumScrollBegin: (
-    event: NativeSyntheticEvent<NativeScrollEvent>
-  ) => void;
+  onMomentumScrollBegin: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
   onScrollBeginDrag: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
   onScrollEndDrag: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
   onMomentumScrollEnd: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
@@ -89,7 +83,4 @@ export type CollapsibleScenePropsAndRef = {
    * For use in the Animated ListEmptyComponent.
    */
   tabBarHeight: number;
-} & Pick<
-  CollapsibleContext,
-  'onMomentumScrollBegin' | 'onScrollEndDrag' | 'onMomentumScrollEnd'
->;
+} & Pick<CollapsibleContext, "onMomentumScrollBegin" | "onScrollEndDrag" | "onMomentumScrollEnd">;

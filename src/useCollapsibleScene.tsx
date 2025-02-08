@@ -1,8 +1,8 @@
-import { Animated } from 'react-native';
-import { Route } from 'react-native-tab-view';
+import { Animated } from "react-native";
+import { Route } from "react-native-tab-view";
 
-import type { CollapsibleScenePropsAndRef } from './types';
-import { useCollapsibleContext } from './CollapsibleTabViewContext';
+import type { CollapsibleScenePropsAndRef } from "./types";
+import { useCollapsibleContext } from "./CollapsibleTabViewContext";
 
 /**
  *
@@ -25,9 +25,7 @@ import { useCollapsibleContext } from './CollapsibleTabViewContext';
  * />
  * ```
  */
-const useCollapsibleScene = <T extends Route>(
-  routeKey: T['key']
-): CollapsibleScenePropsAndRef => {
+const useCollapsibleScene = <T extends Route>(routeKey: T["key"]): CollapsibleScenePropsAndRef => {
   const context = useCollapsibleContext();
 
   const {

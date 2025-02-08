@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   useNavigationBuilder,
   createNavigatorFactory,
@@ -7,13 +7,13 @@ import {
   TabNavigationState,
   TabActionHelpers,
   ParamListBase,
-} from '@react-navigation/native';
-import MaterialTopTabsCollapsibleTabView from './MaterialTopTabsCollapsibleTabView';
+} from "@react-navigation/native";
+import MaterialTopTabsCollapsibleTabView from "./MaterialTopTabsCollapsibleTabView";
 import {
   createMaterialTopTabNavigator,
   MaterialTopTabNavigationOptions,
-} from '@react-navigation/material-top-tabs';
-import { Props as CollapsibleTabViewProps } from './CollapsibleTabView';
+} from "@react-navigation/material-top-tabs";
+import { Props as CollapsibleTabViewProps } from "./CollapsibleTabView";
 
 // copied from @react-navigation/material-top-tabs because it's not exported
 type MaterialTopTabNavigationEventMap = {
@@ -35,13 +35,9 @@ type MaterialTopTabNavigationEventMap = {
   swipeEnd: { data: undefined };
 };
 
-type BaseNavigator = ReturnType<
-  typeof createMaterialTopTabNavigator
->['Navigator'];
+type BaseNavigator = ReturnType<typeof createMaterialTopTabNavigator>["Navigator"];
 
-type BaseProps = Parameters<
-  Extract<BaseNavigator, React.FunctionComponent<any>>
->[0];
+type BaseProps = Parameters<Extract<BaseNavigator, React.FunctionComponent<any>>>[0];
 
 type Props = BaseProps & {
   collapsibleOptions?: Partial<CollapsibleTabViewProps<any>>;

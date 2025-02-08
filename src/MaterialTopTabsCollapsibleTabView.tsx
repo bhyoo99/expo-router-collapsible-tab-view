@@ -1,23 +1,15 @@
-import * as React from 'react';
-import { SceneRendererProps } from 'react-native-tab-view';
-import {
-  NavigationHelpersContext,
-  TabActions,
-  useTheme,
-} from '@react-navigation/native';
+import * as React from "react";
+import { SceneRendererProps } from "react-native-tab-view";
+import { NavigationHelpersContext, TabActions, useTheme } from "@react-navigation/native";
 
-import CollapsibleTabView, {
-  Props as CollapsibleTabViewProps,
-} from './CollapsibleTabView';
+import CollapsibleTabView, { Props as CollapsibleTabViewProps } from "./CollapsibleTabView";
 import {
   MaterialTopTabBarProps,
   MaterialTopTabBar,
   MaterialTopTabView,
-} from '@react-navigation/material-top-tabs';
+} from "@react-navigation/material-top-tabs";
 
-export type MaterialTopTabsCollapsibleTabViewProps = Parameters<
-  typeof MaterialTopTabView
->[0] & {
+export type MaterialTopTabsCollapsibleTabViewProps = Parameters<typeof MaterialTopTabView>[0] & {
   collapsibleOptions?: Partial<CollapsibleTabViewProps<any>>;
 };
 
@@ -62,12 +54,9 @@ export default function MaterialTopTabsCollapsibleTabView({
         renderTabBar={renderTabBar}
         renderPager={pager}
         renderLazyPlaceholder={lazyPlaceholder}
-        onSwipeStart={() => navigation.emit({ type: 'swipeStart' })}
-        onSwipeEnd={() => navigation.emit({ type: 'swipeEnd' })}
-        sceneContainerStyle={[
-          { backgroundColor: colors.background },
-          sceneContainerStyle,
-        ]}
+        onSwipeStart={() => navigation.emit({ type: "swipeStart" })}
+        onSwipeEnd={() => navigation.emit({ type: "swipeEnd" })}
+        sceneContainerStyle={[{ backgroundColor: colors.background }, sceneContainerStyle]}
       />
     </NavigationHelpersContext.Provider>
   );

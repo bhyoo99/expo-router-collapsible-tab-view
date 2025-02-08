@@ -1,4 +1,4 @@
-import type { ScrollRef } from './types';
+import type { ScrollRef } from "./types";
 
 /**
  * Utility function to perform scroll on:
