@@ -1,13 +1,13 @@
-import * as React from "react";
-import { SceneRendererProps } from "react-native-tab-view";
-import { NavigationHelpersContext, TabActions, useTheme } from "@react-navigation/native";
-
-import CollapsibleTabView, { Props as CollapsibleTabViewProps } from "./CollapsibleTabView";
 import {
-  MaterialTopTabBarProps,
   MaterialTopTabBar,
+  MaterialTopTabBarProps,
   MaterialTopTabView,
 } from "@react-navigation/material-top-tabs";
+import { NavigationHelpersContext, TabActions, useTheme } from "@react-navigation/native";
+import * as React from "react";
+import { SceneRendererProps } from "react-native-tab-view";
+
+import CollapsibleTabView, { Props as CollapsibleTabViewProps } from "./CollapsibleTabView";
 
 export type MaterialTopTabsCollapsibleTabViewProps = Parameters<typeof MaterialTopTabView>[0] & {
   collapsibleOptions?: Partial<CollapsibleTabViewProps<any>>;

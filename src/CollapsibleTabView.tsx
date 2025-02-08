@@ -1,18 +1,19 @@
 import React from "react";
-import { StyleSheet, Animated, ViewStyle, LayoutChangeEvent, View } from "react-native";
+import { Animated, LayoutChangeEvent, StyleSheet, View, ViewStyle } from "react-native";
 import {
-  TabView,
-  TabBar,
-  Route,
-  TabViewProps,
-  TabBarProps,
   NavigationState,
+  Route,
   SceneRendererProps,
+  TabBar,
+  TabBarProps,
+  TabView,
+  TabViewProps,
 } from "react-native-tab-view";
 import { useDebouncedCallback } from "use-debounce";
+
 import { CollapsibleContextProvider } from "./CollapsibleTabViewContext";
 import scrollScene from "./scrollScene";
-import type { ScrollRef, GetRef } from "./types";
+import type { GetRef, ScrollRef } from "./types";
 
 type PTabBarProps<T extends Route> = Partial<TabBarProps<T>>;
 

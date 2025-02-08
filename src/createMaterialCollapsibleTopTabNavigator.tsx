@@ -1,19 +1,20 @@
-import * as React from "react";
-import {
-  useNavigationBuilder,
-  createNavigatorFactory,
-  TabRouter,
-  TabRouterOptions,
-  TabNavigationState,
-  TabActionHelpers,
-  ParamListBase,
-} from "@react-navigation/native";
-import MaterialTopTabsCollapsibleTabView from "./MaterialTopTabsCollapsibleTabView";
 import {
   createMaterialTopTabNavigator,
   MaterialTopTabNavigationOptions,
 } from "@react-navigation/material-top-tabs";
+import {
+  createNavigatorFactory,
+  ParamListBase,
+  TabActionHelpers,
+  TabNavigationState,
+  TabRouter,
+  TabRouterOptions,
+  useNavigationBuilder,
+} from "@react-navigation/native";
+import * as React from "react";
+
 import { Props as CollapsibleTabViewProps } from "./CollapsibleTabView";
+import MaterialTopTabsCollapsibleTabView from "./MaterialTopTabsCollapsibleTabView";
 
 // copied from @react-navigation/material-top-tabs because it's not exported
 type MaterialTopTabNavigationEventMap = {

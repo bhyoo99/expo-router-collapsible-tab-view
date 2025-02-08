@@ -1,4 +1,5 @@
 import React from "react";
+
 import type { CollapsibleContext } from "./types";
 
 type CreateCtx<A> = readonly [
@@ -22,4 +23,4 @@ function createContext<A>(): CreateCtx<A> {
 }
 const [useCollapsibleContext, CollapsibleContextProvider] = createContext<CollapsibleContext>();
 
-export { useCollapsibleContext, CollapsibleContextProvider, createContext };
+export { CollapsibleContextProvider, createContext, useCollapsibleContext };

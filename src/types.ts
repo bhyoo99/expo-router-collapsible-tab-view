@@ -1,4 +1,4 @@
-import { Animated, NativeSyntheticEvent, NativeScrollEvent } from "react-native";
+import { Animated, NativeScrollEvent, NativeSyntheticEvent } from "react-native";
 
 export type ScrollableView = {
   scrollTo: (params: { x?: number; y?: number; animated?: boolean }) => void;
