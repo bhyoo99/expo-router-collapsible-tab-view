@@ -52,7 +52,6 @@ export default function MaterialTopTabsCollapsibleTabView({
         renderScene={({ route }) => descriptors[route.key].render()}
         navigationState={state}
         renderTabBar={renderTabBar}
-        renderPager={pager}
         renderLazyPlaceholder={lazyPlaceholder}
         onSwipeStart={() => navigation.emit({ type: "swipeStart" })}
         onSwipeEnd={() => navigation.emit({ type: "swipeEnd" })}
