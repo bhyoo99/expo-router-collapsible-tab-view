@@ -1,3 +1,7 @@
 module.exports = {
-  extends: "universe",
+  extends: ["universe", "prettier"],
+  plugins: ["prettier"],
+  rules: {
+    "prettier/prettier": "error",
+  },
 };
