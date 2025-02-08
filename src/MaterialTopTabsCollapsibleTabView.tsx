@@ -14,9 +14,7 @@ export type MaterialTopTabsCollapsibleTabViewProps = Parameters<typeof MaterialT
 };
 
 export default function MaterialTopTabsCollapsibleTabView({
-  lazyPlaceholder,
   tabBar = (props: MaterialTopTabBarProps) => <MaterialTopTabBar {...props} />,
-  tabBarOptions,
   state,
   navigation,
   descriptors,
@@ -28,7 +26,6 @@ export default function MaterialTopTabsCollapsibleTabView({
 
   const renderTabBar = (props: SceneRendererProps) => {
     return tabBar({
-      ...tabBarOptions,
       ...props,
       state: state,
       navigation: navigation,
@@ -51,7 +48,10 @@ export default function MaterialTopTabsCollapsibleTabView({
         renderScene={({ route }) => descriptors[route.key].render()}
         navigationState={state}
         renderTabBar={renderTabBar}
-        renderLazyPlaceholder={lazyPlaceholder}
+        renderLazyPlaceholder={({ route }) =>
+          descriptors[route.key].options.lazyPlaceholder?.() ?? null
+        }
+        lazy={({ route }) => descriptors[route.key].options.lazy === true}
         onSwipeStart={() => navigation.emit({ type: "swipeStart" })}
         onSwipeEnd={() => navigation.emit({ type: "swipeEnd" })}
         sceneContainerStyle={[{ backgroundColor: colors.background }, sceneContainerStyle]}
